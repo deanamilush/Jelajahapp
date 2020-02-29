@@ -1,5 +1,11 @@
 <resources>
-    <string name="app_name">JelajahApps</string>
+    <string name="app_name">Jelajah Dunia</string>
     <string name="mount_name">Nama Gunung</string>
     <string name="detail">Detail</string>
+    <string name="about">About</string>
+    <string name="hint_name">hint_name</string>
+    <string name="nama_lengkap">Dean Amilush Majid</string>
+    <string name="email">deanamilushmajid@gmail.com</string>
+    <string name="intro">Hiking is easier!</string>
+    <string name="versi">App Version</string>
 </resources>

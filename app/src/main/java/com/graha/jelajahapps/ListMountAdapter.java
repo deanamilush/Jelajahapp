@@ -17,6 +17,12 @@ import java.util.ArrayList;
 public class ListMountAdapter extends RecyclerView.Adapter<ListMountAdapter.ListViewHolder>  {
 
     private ArrayList<Mount> listMount;
+    private OnItemClickCallback onItemClickCallback;
+
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback;
+    }
+
     public ListMountAdapter(ArrayList<Mount> list) {
         this.listMount = list;
     }
@@ -26,10 +32,14 @@ public class ListMountAdapter extends RecyclerView.Adapter<ListMountAdapter.List
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_row_mount, viewGroup, false);
         return new ListViewHolder(view);
+
+
     }
 
+
+
     @Override
-    public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ListViewHolder holder, int position) {
         Mount hero = listMount.get(position);
         Glide.with(holder.itemView.getContext())
                 .load(hero.getPhoto())
@@ -37,6 +47,13 @@ public class ListMountAdapter extends RecyclerView.Adapter<ListMountAdapter.List
                 .into(holder.imgPhoto);
         holder.tvName.setText(hero.getName());
         holder.tvDetail.setText(hero.getDetail());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickCallback.onItemClicked(listMount.get(holder.getAdapterPosition()));
+            }
+        });
     }
 
     @Override
@@ -54,5 +71,9 @@ public class ListMountAdapter extends RecyclerView.Adapter<ListMountAdapter.List
             tvName = itemView.findViewById(R.id.tv_item_name);
             tvDetail = itemView.findViewById(R.id.tv_item_detail);
         }
+
+    }
+    public interface OnItemClickCallback {
+        void onItemClicked(Mount data);
     }
 }
